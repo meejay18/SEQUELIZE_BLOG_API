@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.postTable, { foreignKey: 'postId', as: 'all posts' })
     }
   }
   commenttable.init(

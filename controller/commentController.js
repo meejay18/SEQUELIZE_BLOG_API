@@ -64,3 +64,18 @@ exports.deleteComment = async (req, res) => {
     })
   }
 }
+
+exports.getAllComment = async (req, res) => {
+  try {
+    const comments = await commenttable.findAll({ include: 'all posts' })
+    return res.status(200).json({
+      message: 'successfull',
+      data: comments,
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error getting comments',
+      error: error.message,
+    })
+  }
+}

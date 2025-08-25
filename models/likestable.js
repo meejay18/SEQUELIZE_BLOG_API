@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
   likestable.init(
     {
       id: { type: DataTypes.UUID, primaryKey: true, defaultValue: uuidv4 },
-      likescount: DataTypes.INTEGER,
       email: { type: DataTypes.STRING, unique: true, allowNull: false },
       postId: { type: DataTypes.UUID, references: 'postTables', key: 'id' },
     },

@@ -1,4 +1,6 @@
 const { postTable } = require('../models')
+const { commenttable } = require('../models')
+const { likestable } = require('../models')
 
 exports.createPost = async (req, res) => {
   const data = req.body
@@ -65,6 +67,26 @@ exports.deletePost = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: 'Error deleting post',
+      error: error.message,
+    })
+  }
+}
+
+exports.getAllPosts = async (req, res) => {
+  try {
+    const data = await postTable.findAll({
+      include: [
+        { model: likestable, as: 'Total number of likes' },
+        { model: commenttable, as: 'Total number of comments' },
+      ],
+    })
+    return res.status(200).json({
+      message: 'info retrieved successfully',
+      data: data,
+    })
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error',
       error: error.message,
     })
   }

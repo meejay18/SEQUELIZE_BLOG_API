@@ -1,5 +1,7 @@
 'use strict'
+
 const { Model } = require('sequelize')
+
 module.exports = (sequelize, DataTypes) => {
   class postTable extends Model {
     /**
@@ -9,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.hasMany(models.likestable, { foreignKey: 'postId', as: 'Total number of likes' })
+      this.hasMany(models.commenttable, { foreignKey: 'postId', as: 'Total number of comments' })
     }
   }
 
